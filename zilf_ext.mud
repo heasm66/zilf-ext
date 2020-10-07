@@ -179,7 +179,7 @@ UVECTOR        uvector         SUBR    mdl_builtin_eval_uvector          EXT
 VALID-TYPE?    valid_typep     SUBR    mdl_builtin_eval_valid_typep      Yes                           
 VALUE          value           SUBR    mdl_builtin_eval_value            Yes                           
 VECTOR         vector          SUBR    mdl_builtin_eval_vector           Yes                           
-WARRANTY       warranty        SUBR    mdl_builtin_eval_warranty                   Not used in Zork    
+WARRANTY       warranty        SUBR    mdl_builtin_eval_warranty         EXT       Not used in Zork    
 XORB           xorb            SUBR    mdl_builtin_eval_xorb             Yes                           
 "
 
@@ -238,3 +238,14 @@ XORB           xorb            SUBR    mdl_builtin_eval_xorb             Yes
 		
 ;"creates a UVECTOR from explicit arguments"
 <DEFINE UVECTOR ("TUPLE" ELEMENTS) <VECTOR !.ELEMENTS>>
+
+<DEFINE WARRANTY () 
+	<PRINC "THERE IS NO WARRANTY FOR THIS PROGRAM, TO THE EXTENT PERMITTED BY"> <CRLF>
+	<PRINC "APPLICABLE LAW.  EXCEPT WHEN OTHERWISE STATED IN WRITING THE COPYRIGHT"> <CRLF>
+	<PRINC "HOLDERS AND/OR OTHER PARTIES PROVIDE THIS PROGRAM \"AS IS\" WITHOUT WARRANTY"> <CRLF>
+	<PRINC "OF ANY KIND, EITHER EXPRESSED OR IMPLIED, INCLUDING, BUT NOT LIMITED TO,"> <CRLF>
+	<PRINC "THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR"> <CRLF>
+	<PRINC "PURPOSE.  THE ENTIRE RISK AS TO THE QUALITY AND PERFORMANCE OF THE PROGRAM"> <CRLF>
+	<PRINC "IS WITH YOU.  SHOULD THE PROGRAM PROVE DEFECTIVE, YOU ASSUME THE COST OF"> <CRLF>
+	<PRINC "ALL NECESSARY SERVICING, REPAIR OR CORRECTION."> <CRLF>
+	<>>
