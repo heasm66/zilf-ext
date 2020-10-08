@@ -19,7 +19,7 @@ ANDB           andb            SUBR    mdl_builtin_eval_andb             Yes
 APPLICABLE?    applicablep     SUBR    mdl_builtin_eval_applicablep      Yes                           
 APPLY          apply           SUBR    mdl_builtin_eval_apply            Yes                           
 APPLYTYPE      applytype       SUBR    mdl_builtin_eval_applytype        Yes                           
-ARGS           args            SUBR    mdl_builtin_eval_args                                           
+ARGS           args            SUBR    mdl_builtin_eval_args             EXT                           
 ASCII          ascii           SUBR    mdl_builtin_eval_ascii            Yes                           
 ASSIGNED?      assigned        SUBR    mdl_builtin_eval_assigned         Yes                           
 ATOM           atom            SUBR    mdl_builtin_eval_atom             Yes                           
@@ -186,6 +186,15 @@ XORB           xorb            SUBR    mdl_builtin_eval_xorb             Yes
 ;"returns absolute value of a number (arithmetic)"
 <DEFINE ABS (NUMBER) #DECL ((NUMBER) FIX) 
 	<COND (<G=? .NUMBER 0> .NUMBER) (T <* .NUMBER -1>)>>
+
+;"returns arguments of a given un-returned Subroutine call"
+;"Only used three times in Zork
+	TELL-REPL.MUD..STACKDUMP-ATOMS-TO-SKIP
+	IMPL.MUD..ZSTACK
+	IMPL.MUD..ZRETRY
+  None is used for running the game (just for debugging).
+  It's OK to have a placeholder FUNC that returns empty LIST"
+<DEFINE ARGS (FRAME) ()>
 
 ;"creates a bit mask for PUTBITS and GETBITS"
 <DEFINE BITS (WIDTH "OPTIONAL" (RIGHT-EDGE 0)) #DECL ((WIDTH RIGHT-EDGE) FIX)
