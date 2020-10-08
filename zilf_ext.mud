@@ -19,7 +19,7 @@ ANDB           andb            SUBR    mdl_builtin_eval_andb             Yes
 APPLICABLE?    applicablep     SUBR    mdl_builtin_eval_applicablep      Yes                           
 APPLY          apply           SUBR    mdl_builtin_eval_apply            Yes                           
 APPLYTYPE      applytype       SUBR    mdl_builtin_eval_applytype        Yes                           
-ARGS           args            SUBR    mdl_builtin_eval_args             EXT                           
+ARGS           args            SUBR    mdl_builtin_eval_args             EXT       Only used in DEBUG-code                    
 ASCII          ascii           SUBR    mdl_builtin_eval_ascii            Yes                           
 ASSIGNED?      assigned        SUBR    mdl_builtin_eval_assigned         Yes                           
 ATOM           atom            SUBR    mdl_builtin_eval_atom             Yes                           
@@ -51,7 +51,7 @@ EVAL           eval            SUBR    mdl_builtin_eval_eval             Yes
 EVALTYPE       evaltype        SUBR    mdl_builtin_eval_evaltype         Yes                           
 EVENT          event           SUBR    mdl_builtin_eval_event                                          
 EXPAND         expand          SUBR    mdl_builtin_eval_expand           Yes                           
-FFRAME         fframe          SUBR    mdl_builtin_eval_fframe                                         
+FFRAME         fframe          SUBR    mdl_builtin_eval_fframe           EXT       Only used in DEBUG-code                       
 FILE-EXISTS?   file_existsp    SUBR    mdl_builtin_eval_file_existsp               Not used in Zork    
 FILE-LENGTH    file_length     SUBR    mdl_builtin_eval_file_length      Yes                           
 FIX            fix             SUBR    mdl_builtin_eval_fix              Yes                           
@@ -59,9 +59,9 @@ FLATSIZE       flatsize        SUBR    mdl_builtin_eval_flatsize                
 FLOAD          fload           SUBR    mdl_builtin_eval_fload            Yes                           
 FLOAT          float           SUBR    mdl_builtin_eval_float                                          
 FORM           form            SUBR    mdl_builtin_eval_form             Yes                           
-FRAME          frame           SUBR    mdl_builtin_eval_frame                                          
+FRAME          frame           SUBR    mdl_builtin_eval_frame            EXT       Only used in DEBUG-code                       
 FREEZE         freeze          SUBR    mdl_builtin_eval_freeze                                         
-FUNCT          funct           SUBR    mdl_builtin_eval_funct                                          
+FUNCT          funct           SUBR    mdl_builtin_eval_funct            EXT       Only used in DEBUG-code                               
 FUNCTION       function        FSUBR   mdl_builtin_eval_function         Yes                           
 G?             greaterp        SUBR    mdl_builtin_eval_greaterp         Yes                           
 G=?            greaterequalp   SUBR    mdl_builtin_eval_greaterequalp    Yes                           
@@ -192,9 +192,9 @@ XORB           xorb            SUBR    mdl_builtin_eval_xorb             Yes
 	TELL-REPL.MUD..STACKDUMP-ATOMS-TO-SKIP
 	IMPL.MUD..ZSTACK
 	IMPL.MUD..ZRETRY
-  None is used for running the game (just for debugging).
-  It's OK to have a placeholder FUNC that returns empty LIST"
-<DEFINE ARGS (FRAME) ()>
+  It is not used for running the game (just for debugging).
+  It's OK to have a placeholder FUNCTION that returns empty TUPLE"
+<DEFINE ARGS (FRAME) <TUPLE>>
 
 ;"creates a bit mask for PUTBITS and GETBITS"
 <DEFINE BITS (WIDTH "OPTIONAL" (RIGHT-EDGE 0)) #DECL ((WIDTH RIGHT-EDGE) FIX)
@@ -210,7 +210,31 @@ XORB           xorb            SUBR    mdl_builtin_eval_xorb             Yes
 		   .UVECTOR)
 		  (T <MAPR <> <FUNCTION (L) <PUT .L 1 <CHTYPE <1 .L> .TYPE>>> .UVECTOR>
 		   .UVECTOR)>>
- 
+
+;"returns a previous Subroutine call"
+;"Only used one time in Zork
+	TELL-REPL.MUD..STACKDUMP-ATOMS-TO-SKIP
+  It is not used for running the game (just for debugging).
+  It's OK to have a placeholder FUNCTION that returns TOPLEVEL"
+<DEFINE FFRAME ("OPT" FRAME) TOPLEVEL>
+
+;"returns a previous Subroutine call"
+;"Only used two times in Zork
+	IMPL.MUD..ZSTACK
+	IMPL.MUD..ZRETRY
+  It is not used for running the game (just for debugging).
+  It's OK to have a placeholder FUNCTION that returns TOPLEVEL"
+<DEFINE FRAME ("OPT" FRAME) TOPLEVEL>
+
+;"returns Subroutine name of a given previous Subroutine call"
+;"Only used three times in Zork
+	TELL-REPL.MUD..STACKDUMP-ATOMS-TO-SKIP
+	IMPL.MUD..ZSTACK
+	IMPL.MUD..ZRETRY
+  It is not used for running the game (just for debugging).
+  It's OK to have a placeholder FUNCTION that returns TOPLEVEL"
+<DEFINE FUNCT (FRAME) TOPLEVEL>
+
 ;"returns a bit field of a FIX"
 <DEFINE GETBITS (FROM FIELD 
 	"AUX" (WIDTH <MOD .FIELD 256>) (RIGHT-EDGE </ .FIELD 256>)) 
